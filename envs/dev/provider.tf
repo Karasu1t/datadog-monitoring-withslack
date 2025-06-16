@@ -12,5 +12,5 @@ provider "google" {
   project     = local.id
   region      = local.gcp_region
   zone        = local.gcp_zone
-  credentials = "../../keys.json"
+  credentials = "/work/GCP/keys.json"
 }

@@ -19,14 +19,4 @@ module "gke" {
   subnet_name        = module.network.subnet_name
   pod_range_name     = module.network.project_pod_range_name
   svc_range_name     = module.network.project_svc_range_name
-  argopod_range_name = module.network.project_argopod_range_name
-  argosvc_range_name = module.network.project_argosvc_range_name
-}
-
-# Artifactory Registry
-module "artifactregistry" {
-  source      = "../../modules/artifactregistry"
-  project     = local.project
-  environment = local.environment
-  gcp_region  = local.gcp_region
 }
