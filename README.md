@@ -19,6 +19,7 @@ Slack への発報方法として Datadog → Slack と Cloud Monitoring → Clo
 - GitHub 上に以下のリポジトリを作成しておく：
 - [datadog-monitoring-withslack](https://github.com/Karasu1t/datadog-monitoring-withslack)
 - GoogleCloud アカウントを作成し、予め必要な API の有効化および terraform のための ServiceAccount を作成している
+- Datadogアカウントを作成し、予めAPIキーを取得していること
 - 本学習を進めるにあたり以下のバージョンで実施しています。
 
 1.  OS Ubuntu(WSL) 5.15.167.4-microsoft-standard-WSL2
