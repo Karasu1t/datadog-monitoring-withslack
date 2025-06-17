@@ -1,17 +1,14 @@
-### 工事中です。(2025/06/16)
-
 ## 概要
 
 GKE を使用し、Datadog を使用したモニタリング基盤を構築し、ダッシュボードの操作感を学ぶ  
 また、クラスタ上にデプロイした Pod にエラーが発生した場合にエラー内容を Slack 通知できるシステムを構築する
+Slack への発報方法として Datadog → Slack と Cloud Monitoring → Cloud Functions → Slack の 2 パターンを想定する
 
 ## 目的
 
--
-
-- BigQuery の操作を出来るようにする
-- データレイク(BigQuery) → DWH(BigQuery) → データマートの一連の構成を GoogleCloud 環境上で構築できるようになる
-- ETL を GoogleCloud 上で実施する場合の方法を手を動かして身に着ける
+- Datadog の UI にてどういった操作感なのかを触って確かめてみる
+- Slack にてアラート発報時にどうやって利用者宛に通達されるのかを設定の観点で実践する
+- Dtatadog を使用する場合と、Cloud Monitoring だけで監視をする場合の違いをそれぞれ構築して差異を確認する
 
 ## アーキテクチャ図
 
@@ -20,35 +17,37 @@ GKE を使用し、Datadog を使用したモニタリング基盤を構築し�
 ## 前提条件
 
 - GitHub 上に以下のリポジトリを作成しておく：
-- [storage-bq-etl-pipeline](https://github.com/Karasu1t/storage-bq-etl-pipeline)
+- [datadog-monitoring-withslack](https://github.com/Karasu1t/datadog-monitoring-withslack)
 - GoogleCloud アカウントを作成し、予め必要な API の有効化および terraform のための ServiceAccount を作成している
 - 本学習を進めるにあたり以下のバージョンで実施しています。
 
 1.  OS Ubuntu(WSL) 5.15.167.4-microsoft-standard-WSL2
 2.  Terraform v1.12.1
 3.  Google Cloud SDK 522.0.0
-4.  bq 2.1.16
+4.  kubectl v1.30.0
+5.  helm v3.18.2
 
 ## フェーズ構成
 
 本環境構築は以下のフェーズに分けて進める：
 
-1. **Cloud Storage と BigQuery Dataset をデプロイし Cloud Storage に格納した csv を元にテーブルを作成できること**
-2. **テーブル上のデータを元にモデル作成が出来ること**
-3. **Null データを含むテーブルを SQL にて加工したデータマートを作成しモデル作成が出来ること**
-4. **Null データを含むデータを ETL 処理後にテーブルを作成し、モデル作成が出来ること**
+1. **GKE で Datadog をデプロイし、別途作成したコンテナのメトリクス情報を Datadog にて確認できること**
+2. **不要なログを Datadog に収集することを抑止できること**
+3. **Slack に Datadog アプリをインストールし、アラート発報時に Slack にて通知を受け取ることが出来ること**
+4. **Cloud Function で Monitoring し、アラート時 Slack で通知を受け取ることが出来ること**
 
 ---
 
 各フェーズの詳細手順や設定内容については、以降のセクションに記載。
 
-[Phase 1 - BigQuery の Dataset 上でテーブルを作成する](https://github.com/Karasu1t/storage-bq-etl-pipeline/blob/main/Phase1.md)  
-[Phase 2 - テーブル上のデータを元にモデル作成](https://github.com/Karasu1t/storage-bq-etl-pipeline/blob/main/Phase2.md)  
-[Phase 3 - Null データを含むテーブルを SQL にて加工したデータマートを作成しモデル作成](https://github.com/Karasu1t/storage-bq-etl-pipeline/blob/main/Phase3.md)  
-[Phase 4 - Null データを含むデータを ETL 処理後にテーブルを作成しモデル作成](https://github.com/Karasu1t/storage-bq-etl-pipeline/blob/main/Phase4.md)
+[Phase 1 - Datadog をデプロイする](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase1.md)  
+[Phase 2 - 不要なログの収集を抑止する](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase2.md)  
+[Phase 3 - Slack にてアラート通知を受け取るようにする(From Datadog)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase3.md)  
+[Phase 4 - Slack にてアラート通知を受け取るようにする(From Monitoring)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase4.md)
 
 ## 注意事項
 
 - ServiceAccount の権限については事前定義ロールを使用
 - dev フォルダ配下に locals.tf が本来あるがプロジェクト ID の記載があるため、セキュリティの兼ね合いで git 上に掲載せず
 - ServiceAccount の key についても同様
+- Datadog は無料トライアル期間中に実施している
