@@ -31,12 +31,14 @@ Browse Templates をクリックする
 
 ![モニタリング画面2](picture/Phase2-2-2.png)
 
-「a pod is in an ImagePullBackOff state」Template を選択する
+「pod is in an ImagePullBackOff state」Template を選択する
 
 ![モニタリング画面3](picture/Phase2-2-3.png)
 
 Create and Publish をクリックする  
 ※Image Pull 時に存在しないイメージを使用してデプロイ時にアラート検知する
+
+![モニタリング作成画面](picture/Phase2-2-4.png)
 
 ローカル環境にて以下のコマンドを実行し、意図的に存在しない Image を指定して Pod をデプロイする
 
@@ -44,15 +46,15 @@ Create and Publish をクリックする
 kubectl run test --image=test -n default
 </code></pre>
 
-![デプロイ失敗画面](picture/Phase2-2-4.png)
+![デプロイ失敗画面](picture/Phase2-2-5.png)
 
 コンソール画面より、Alert が検知されていることを確認する  
 ※確認後 test Pod は削除する
 
-![アラート画面](picture/Phase2-2-5.png)
+![アラート画面](picture/Phase2-2-6.png)
 
 #### 3. Slack 側の設定
 
-※Slack通知設定については個人情報が非常に多いため最終的な画面のみ添付  
+※Slack 通知設定については個人情報が非常に多いため最終的な画面のみ添付
 
 ![Slack通知画面3](picture/Phase2-3-1.png)
