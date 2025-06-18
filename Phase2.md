@@ -1,4 +1,4 @@
-## Phase 2 - Phase 2 - Slack にてアラート通知を受け取るようにする(From Datadog)
+## Phase 2 - Slack にてアラート通知を受け取るようにする(From Datadog)
 
 ### 概要
 
