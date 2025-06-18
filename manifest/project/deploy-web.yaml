@@ -27,7 +27,6 @@ spec:
     spec:
       serviceAccountName: default
       containers:
-        # Imageがハードコーディングされているので使用するときは修正必要
         - image: nginx:latest
           imagePullPolicy: Always
           ports:

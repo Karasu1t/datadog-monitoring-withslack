@@ -2,7 +2,7 @@
 
 GKE を使用し、Datadog を使用したモニタリング基盤を構築し、ダッシュボードの操作感を学ぶ  
 また、クラスタ上にデプロイした Pod にエラーが発生した場合にエラー内容を Slack 通知できるシステムを構築する
-Slack への発報方法として Datadog → Slack と Cloud Monitoring → Cloud Functions → Slack の 2 パターンを想定する
+Slack への発報方法として Datadog → Slack パターンを想定する
 
 ## 目的
 
@@ -19,7 +19,7 @@ Slack への発報方法として Datadog → Slack と Cloud Monitoring → Clo
 - GitHub 上に以下のリポジトリを作成しておく：
 - [datadog-monitoring-withslack](https://github.com/Karasu1t/datadog-monitoring-withslack)
 - GoogleCloud アカウントを作成し、予め必要な API の有効化および terraform のための ServiceAccount を作成している
-- Datadogアカウントを作成し、予めAPIキーを取得していること
+- Datadog アカウントを作成し、予め API キーを取得していること
 - 本学習を進めるにあたり以下のバージョンで実施しています。
 
 1.  OS Ubuntu(WSL) 5.15.167.4-microsoft-standard-WSL2
@@ -33,18 +33,15 @@ Slack への発報方法として Datadog → Slack と Cloud Monitoring → Clo
 本環境構築は以下のフェーズに分けて進める：
 
 1. **GKE で Datadog をデプロイし、別途作成したコンテナのメトリクス情報を Datadog にて確認できること**
-2. **不要なログを Datadog に収集することを抑止できること**
-3. **Slack に Datadog アプリをインストールし、アラート発報時に Slack にて通知を受け取ることが出来ること**
-4. **Cloud Function で Monitoring し、アラート時 Slack で通知を受け取ることが出来ること**
+2. **Slack に Datadog アプリをインストールし、アラート発報時に Slack にて通知を受け取ることが出来ること**
+3. **Cloud Function で Monitoring し、アラート時 Slack で通知を受け取ることが出来ること**
 
 ---
 
 各フェーズの詳細手順や設定内容については、以降のセクションに記載。
 
 [Phase 1 - Datadog をデプロイする](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase1.md)  
-[Phase 2 - 不要なログの収集を抑止する](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase2.md)  
-[Phase 3 - Slack にてアラート通知を受け取るようにする(From Datadog)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase3.md)  
-[Phase 4 - Slack にてアラート通知を受け取るようにする(From Monitoring)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase4.md)
+[Phase 2 - Slack にてアラート通知を受け取るようにする(From Datadog)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase3.md)
 
 ## 注意事項
 
@@ -52,3 +49,4 @@ Slack への発報方法として Datadog → Slack と Cloud Monitoring → Clo
 - dev フォルダ配下に locals.tf が本来あるがプロジェクト ID の記載があるため、セキュリティの兼ね合いで git 上に掲載せず
 - ServiceAccount の key についても同様
 - Datadog は無料トライアル期間中に実施している
+- Slack アカウントおよびワークスペースを作成していること
