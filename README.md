@@ -41,7 +41,7 @@ Slack への発報方法として Datadog → Slack パターンを想定する
 各フェーズの詳細手順や設定内容については、以降のセクションに記載。
 
 [Phase 1 - Datadog をデプロイする](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase1.md)  
-[Phase 2 - Slack にてアラート通知を受け取るようにする(From Datadog)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase3.md)
+[Phase 2 - Slack にてアラート通知を受け取るようにする(From Datadog)](https://github.com/Karasu1t/datadog-monitoring-withslack/blob/main/Phase2.md)
 
 ## 注意事項
 
